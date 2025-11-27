@@ -13,7 +13,7 @@ RUN sed -i 's|deb.debian.org|archive.debian.org|g' /etc/apt/sources.list && \
     echo 'Acquire::Check-Valid-Until "false";' > /etc/apt/apt.conf.d/99disable-valid-until && \
     apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y \
-    build-essential wget tar perl make gcc libz-dev ca-certificates && \
+    build-essential wget tar perl make gcc libz-dev ca-certificates openssh-client && \
     apt-get clean && rm -rf /var/lib/apt/lists/* && \
     wget https://www.openssl.org/source/old/1.0.2/openssl-$OPENSSL_VERSION.tar.gz && \
     tar xvf openssl-$OPENSSL_VERSION.tar.gz && \
@@ -27,7 +27,8 @@ RUN sed -i 's|deb.debian.org|archive.debian.org|g' /etc/apt/sources.list && \
     ./configure --with-ssl=/usr/local/openssl-1.0.2 && \
     make && make install && \
     cd / && rm -rf stunnel-$STUNNEL_VERSION* && \
-    sed -i "s|ILO_IP|${ILO_IP}|g" /etc/stunnel/stunnel.conf
+    sed -i "s|ILO_IP|${ILO_IP}|g" /etc/stunnel/stunnel.conf && \
+    echo "    PubkeyAcceptedKeyTypes +ssh-dss\n    HostKeyAlgorithms +ssh-dss\n    KexAlgorithms +diffie-hellman-group14-sha1" >> /etc/ssh/ssh_config
 
 EXPOSE 8080
 

@@ -57,6 +57,10 @@ http://<docker-host>:8080
 
 - The container will proxy HTTP requests to the ILO3 HTTPS interface over TLS 1.0.
 
+Accessing the command line interface
+```bash
+docker compose exec ilo3-proxy ssh <ILO user>@<ILO ip>
+```
 ---
 
 ## Configuration
