@@ -78,4 +78,3 @@ options = NO_SSLv2
 ## Docker Compose
 
 - Exposes port `8080` on the host.
-- Restarts automatically unless stopped.
