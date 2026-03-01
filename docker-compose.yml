@@ -4,3 +4,7 @@ services:
     container_name: ilo3-proxy
     ports:
       - "8080:8080"
+    environment:
+      - SSH_AUTH_SOCK=${SSH_AUTH_SOCK}
+    volumes:
+      - $SSH_AUTH_SOCK=${SSH_AUTH_SOCK}
