@@ -59,7 +59,7 @@ http://<docker-host>:8080
 
 Accessing the command line interface
 ```bash
-docker compose exec ilo3-proxy ssh <ILO user>@<ILO ip>
+docker compose run ilo3-proxy ssh ilo
 ```
 ---
 
