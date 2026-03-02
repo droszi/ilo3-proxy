@@ -26,9 +26,10 @@ RUN sed -i 's|deb.debian.org|archive.debian.org|g' /etc/apt/sources.list && \
     cd stunnel-$STUNNEL_VERSION && \
     ./configure --with-ssl=/usr/local/openssl-1.0.2 && \
     make && make install && \
-    cd / && rm -rf stunnel-$STUNNEL_VERSION* && \
-    sed -i "s|ILO_IP|${ILO_IP}|g" /etc/stunnel/stunnel.conf && \
-    echo "    HostKeyAlgorithms=+ssh-dss\n    KexAlgorithms diffie-hellman-group14-sha1,diffie-hellman-group1-sha1" >> /etc/ssh/ssh_config
+    cd / && rm -rf stunnel-$STUNNEL_VERSION*
+
+RUN echo "\nHost ilo\n    HostName $ILO_IP\n    User Administrator\n    HostKeyAlgorithms=+ssh-dss\n    KexAlgorithms diffie-hellman-group14-sha1,diffie-hellman-group1-sha1" >> /etc/ssh/ssh_config && \
+    sed -i "s|ILO_IP|${ILO_IP}|g" /etc/stunnel/stunnel.conf
 
 EXPOSE 8080
 
